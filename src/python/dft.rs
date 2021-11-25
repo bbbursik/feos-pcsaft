@@ -13,6 +13,7 @@ use feos_dft::*;
 use numpy::*;
 use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
+use pyo3::types::PyDict;
 use quantity::python::*;
 use quantity::si::*;
 use std::collections::HashMap;
