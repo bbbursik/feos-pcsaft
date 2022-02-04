@@ -15,6 +15,8 @@ use std::f64::consts::{FRAC_PI_6, PI};
 use std::fmt;
 use std::rc::Rc;
 
+use feos_dft::entropy_scaling::EntropyScalingFunctionalContribution;
+
 const PI36M1: f64 = 1.0 / (36.0 * PI);
 const N3_CUTOFF: f64 = 1e-5;
 
@@ -318,5 +320,39 @@ impl<N: DualNum<f64> + ScalarOperand> FunctionalContributionDual<N> for PureAttF
 impl fmt::Display for PureAttFunctional {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "Pure attractive")
+    }
+}
+
+impl EntropyScalingFunctionalContribution for PureFMTAssocFunctional {
+    fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
+        let r = self.parameters.hs_diameter(temperature) * 0.5;
+        WeightFunctionInfo::new(self.parameters.component_index.clone(), false).add(
+            WeightFunction::new_scaled(r, WeightFunctionShape::Theta),
+            true,
+        )
+    }
+}
+
+
+
+impl EntropyScalingFunctionalContribution for PureChainFunctional {
+    fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
+        let d = self.parameters.hs_diameter(temperature);
+        WeightFunctionInfo::new(self.parameters.component_index.clone(), false).add(
+            WeightFunction::new_scaled(d.clone(), WeightFunctionShape::Theta),
+            true,
+        )
+    }
+}
+
+
+impl EntropyScalingFunctionalContribution for PureAttFunctional {
+    fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
+        let d = self.parameters.hs_diameter(temperature);
+        const PSI: f64 = 1.3862; // Homosegmented DFT (Sauer2017)
+        WeightFunctionInfo::new(self.parameters.component_index.clone(), false).add(
+            WeightFunction::new_scaled(d * PSI, WeightFunctionShape::Theta),
+            true,
+        )
     }
 }

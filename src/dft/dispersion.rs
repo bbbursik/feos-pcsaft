@@ -10,6 +10,7 @@ use num_dual::DualNum;
 use std::f64::consts::{FRAC_PI_3, PI};
 use std::fmt;
 use std::rc::Rc;
+use feos_dft::entropy_scaling::EntropyScalingFunctionalContribution;
 
 /// psi Parameter for DFT (Sauer2017)
 const PSI_DFT: f64 = 1.3862;
@@ -131,5 +132,31 @@ impl<N: DualNum<f64> + ScalarOperand> FunctionalContributionDual<N> for Attracti
 impl fmt::Display for AttractiveFunctional {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "Attractive functional")
+    }
+}
+
+
+impl EntropyScalingFunctionalContribution for AttractiveFunctional {
+    fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
+        let p = &self.parameters;
+
+        // set psi parameter
+        let mut psi = Array::zeros(p.n_segments.sum());
+        let mut j = 0;
+        for &s in p.n_segments.iter() {
+            for _ in 0..s {
+                psi[j] = if s == 1 {
+                    1.3862 // Homosegmented DFT (Sauer2017)
+                } else {
+                    1.5357 // Heterosegmented DFT (Mairhofer2018)
+                };
+                j += 1;
+            }
+        }
+        let d = p.hs_diameter(temperature);
+        WeightFunctionInfo::new(p.component_index.clone(), false).add(
+            WeightFunction::new_scaled(d * psi, WeightFunctionShape::Theta),
+            true,
+        )
     }
 }

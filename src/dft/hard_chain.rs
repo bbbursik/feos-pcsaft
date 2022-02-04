@@ -8,6 +8,7 @@ use ndarray::*;
 use num_dual::DualNum;
 use std::fmt;
 use std::rc::Rc;
+use feos_dft::entropy_scaling::EntropyScalingFunctionalContribution;
 
 pub(super) fn hard_chain_weight_functions<N: DualNum<f64> + ScalarOperand, P: FMTProperties>(
     p: &Rc<P>,
@@ -97,5 +98,17 @@ impl<N: DualNum<f64> + ScalarOperand> FunctionalContributionDual<N> for ChainFun
 impl fmt::Display for ChainFunctional {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "Hard chain functional")
+    }
+}
+
+
+impl EntropyScalingFunctionalContribution for ChainFunctional {
+    fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
+        let p = &self.parameters;
+        let d = p.hs_diameter(temperature);
+        WeightFunctionInfo::new(p.component_index.clone(), false).add(
+            WeightFunction::new_scaled(d, WeightFunctionShape::Theta),
+            true,
+        )
     }
 }

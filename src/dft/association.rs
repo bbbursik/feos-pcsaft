@@ -11,6 +11,7 @@ use num_dual::DualNum;
 use std::f64::consts::PI;
 use std::fmt;
 use std::rc::Rc;
+use feos_dft::entropy_scaling::EntropyScalingFunctionalContribution;
 
 pub const N0_CUTOFF: f64 = 1e-9;
 
@@ -183,5 +184,16 @@ where
 impl fmt::Display for AssociationFunctional {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "Association functional")
+    }
+}
+
+impl EntropyScalingFunctionalContribution for AssociationFunctional {
+    fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
+        let p = &self.parameters;
+        let r = p.hs_diameter(temperature) * 0.5;
+        WeightFunctionInfo::new(p.component_index.clone(), false).add(
+            WeightFunction::new_scaled(r.clone(), WeightFunctionShape::Theta),
+            true,
+        )
     }
 }
