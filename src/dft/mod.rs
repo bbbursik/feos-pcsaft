@@ -9,7 +9,7 @@ use feos_dft::fundamental_measure_theory::{FMTContribution, FMTProperties, FMTVe
 use feos_dft::solvation::PairPotential;
 use feos_dft::{FunctionalContribution, HelmholtzEnergyFunctional, DFT};
 use hard_chain::ChainFunctional;
-use ndarray::{Array, Array1, Array2};
+use ndarray::{Array, Array1, Array2, RemoveAxis, Axis as Axis_nd};
 use num_dual::DualNum;
 use num_traits::One;
 use pure_saft_functional::*;
@@ -177,15 +177,11 @@ impl EntropyScalingFunctional<SIUnit> for PcSaftFunctional {
         &self.entropy_scaling_contributions
     }
 
-
-    fn viscosity_reference<D>(
+    fn viscosity_reference(
         &self,
-        density: &SIArray<D::Larger>,
+        density: &SIArray<Ix2>,
         temperature: SINumber,
-    ) -> Result<SIArray<D>, EosError>
-    where
-        D: Dimension,
-        D::Larger: Dimension<Smaller = D>,
+    ) -> Result<SIArray<Ix1>, EosError>
     {
         // Extracting parameters and molar weight
         let p = &self.parameters;
@@ -219,7 +215,7 @@ impl EntropyScalingFunctional<SIUnit> for PcSaftFunctional {
         }
 
         // Mole fraction at every grid point
-        let x = (density / &density.sum_axis(Axis_nd(0))).into_value()?;
+        let x = (density / &density.sum_axis(Axis_nd(0))).into_value()?;//.into_dimensionality().unwrap();
 
         //
         let visc_ref = Zip::from(x.lanes(Axis_nd(0))).map_collect(|x| {
@@ -237,14 +233,11 @@ impl EntropyScalingFunctional<SIUnit> for PcSaftFunctional {
 
 
 
-    fn viscosity_correlation<D>(
+    fn viscosity_correlation(
         &self,
-        s_res: &Array<f64, D>,
-        density: &SIArray<D::Larger>,
-    ) -> Result<Array<f64, D>, EosError>
-    where
-        D: Dimension,
-        D::Larger: Dimension<Smaller = D>,
+        s_res: &Array<f64, Ix1>,
+        density: &SIArray<Ix2>,
+    ) -> Result<Array<f64, Ix1>, EosError>
     {
         // Extract references to viscosity parameters
         let coefficients = self
@@ -254,18 +247,18 @@ impl EntropyScalingFunctional<SIUnit> for PcSaftFunctional {
             .expect("Missing viscosity coefficients");
 
         // Mole fraction at every grid point
-        let x = (density / &density.sum_axis(Axis_nd(0))).into_value()?;
+        let x = (density / &density.sum_axis(Axis_nd(0))).into_value()?.into_dimensionality().unwrap();
 
         // Scale residual entropy with mean chain length
-        let mut m = Array::zeros(density.raw_dim());
+        let mut m = Array::zeros(density.raw_dim()).into_dimensionality().unwrap();
         for mut lane in m.lanes_mut(Axis_nd(0)) {
             lane.assign(&self.parameters.m);
         }
-        let m = (&x * &m).sum_axis(Axis_nd(0));
+        let m = (&x * &m).sum_axis(Axis_nd(0)).into_dimensionality().unwrap();
         let s = s_res / &m;
 
         // Mixture parameters
-        let mut pref = Array::zeros(x.raw_dim());
+        let mut pref = Array::zeros(x.raw_dim()).into_dimensionality().unwrap();
         for mut lane in pref.lanes_mut(Axis_nd(0)) {
             lane.assign(&self.parameters.m);
         }
@@ -281,7 +274,7 @@ impl EntropyScalingFunctional<SIUnit> for PcSaftFunctional {
             Zip::from(pref.lanes(Axis_nd(0))).map_collect(|pl| (&coefficients.row(2) * &pl).sum());
         let d =
             Zip::from(pref.lanes(Axis_nd(0))).map_collect(|pl| (&coefficients.row(3) * &pl).sum());
-
+        
         // Return
         Ok(((d * &s + c) * &s + b) * s + a)
         // Ok(a + b * &s + c * &s.powi(2) + d * &s.powi(3))
