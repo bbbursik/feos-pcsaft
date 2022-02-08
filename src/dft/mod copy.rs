@@ -17,7 +17,7 @@ use hard_chain::ChainFunctional;
 use ndarray::Ix1;
 use ndarray::Ix2;
 use ndarray::Zip;
-use ndarray::{Array, Array1, Array2, Axis as Axis_nd, Dimension, RemoveAxis};
+use ndarray::{Array, Array1, Array2, Axis as Axis_nd, RemoveAxis};
 use num_dual::DualNum;
 use num_traits::One;
 use pure_saft_functional::*;
@@ -188,11 +188,7 @@ impl EntropyScalingFunctional<SIUnit> for PcSaftFunctional {
         &self,
         density: &SIArray<D::Larger>,
         temperature: SINumber,
-    ) -> Result<SIArray<D>, EosError>
-    where
-        D: Dimension,
-        D::Larger: Dimension<Smaller = D>,
-    {
+    ) -> Result<SIArray<Ix1>, EosError> {
         // Extracting parameters and molar weight
         let p = &self.parameters;
         let mw = &p.molarweight;
@@ -243,13 +239,9 @@ impl EntropyScalingFunctional<SIUnit> for PcSaftFunctional {
 
     fn viscosity_correlation<D>(
         &self,
-        s_res: &Array<f64, D>,
-        density: &SIArray<D::Larger>,
-    ) -> Result<Array<f64, D>, EosError>
-    where
-        D: Dimension,
-        D::Larger: Dimension<Smaller = D>,
-    {
+        s_res: &Array<f64, Ix1>,
+        density: &SIArray<Ix2>,
+    ) -> Result<Array<f64, Ix1>, EosError> {
         // Extract references to viscosity parameters
         let coefficients = self
             .parameters

@@ -1,14 +1,14 @@
 use crate::parameters::PcSaftParameters;
+use feos_core::EosError;
+use feos_dft::entropy_scaling::EntropyScalingFunctionalContribution;
 use feos_dft::fundamental_measure_theory::FMTProperties;
 use feos_dft::{
     FunctionalContributionDual, WeightFunction, WeightFunctionInfo, WeightFunctionShape,
 };
-use feos_core::EosError;
 use ndarray::*;
 use num_dual::DualNum;
 use std::fmt;
 use std::rc::Rc;
-use feos_dft::entropy_scaling::EntropyScalingFunctionalContribution;
 
 pub(super) fn hard_chain_weight_functions<N: DualNum<f64> + ScalarOperand, P: FMTProperties>(
     p: &Rc<P>,
@@ -101,12 +101,11 @@ impl fmt::Display for ChainFunctional {
     }
 }
 
-
 impl EntropyScalingFunctionalContribution for ChainFunctional {
     fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
         let p = &self.parameters;
         let d = p.hs_diameter(temperature);
-        WeightFunctionInfo::new(p.component_index.clone(), false).add(
+        WeightFunctionInfo::new(p.component_index().clone(), false).add(
             WeightFunction::new_scaled(d, WeightFunctionShape::Theta),
             true,
         )

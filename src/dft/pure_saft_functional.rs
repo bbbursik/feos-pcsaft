@@ -5,7 +5,7 @@ use crate::eos::dispersion::{A0, A1, A2, B0, B1, B2};
 use crate::eos::polar::{AD, AQ, BD, BQ, CD, CQ, PI_SQ_43};
 use crate::parameters::PcSaftParameters;
 use feos_core::{EosError, EosResult};
-use feos_dft::fundamental_measure_theory::FMTVersion;
+use feos_dft::fundamental_measure_theory::{FMTProperties, FMTVersion};
 use feos_dft::{
     FunctionalContributionDual, WeightFunction, WeightFunctionInfo, WeightFunctionShape,
 };
@@ -326,31 +326,28 @@ impl fmt::Display for PureAttFunctional {
 impl EntropyScalingFunctionalContribution for PureFMTAssocFunctional {
     fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
         let r = self.parameters.hs_diameter(temperature) * 0.5;
-        WeightFunctionInfo::new(self.parameters.component_index.clone(), false).add(
+        WeightFunctionInfo::new(self.parameters.component_index().clone(), false).add(
             WeightFunction::new_scaled(r, WeightFunctionShape::Theta),
             true,
         )
     }
 }
 
-
-
 impl EntropyScalingFunctionalContribution for PureChainFunctional {
     fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
         let d = self.parameters.hs_diameter(temperature);
-        WeightFunctionInfo::new(self.parameters.component_index.clone(), false).add(
+        WeightFunctionInfo::new(self.parameters.component_index().clone(), false).add(
             WeightFunction::new_scaled(d.clone(), WeightFunctionShape::Theta),
             true,
         )
     }
 }
 
-
 impl EntropyScalingFunctionalContribution for PureAttFunctional {
     fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
         let d = self.parameters.hs_diameter(temperature);
         const PSI: f64 = 1.3862; // Homosegmented DFT (Sauer2017)
-        WeightFunctionInfo::new(self.parameters.component_index.clone(), false).add(
+        WeightFunctionInfo::new(self.parameters.component_index().clone(), false).add(
             WeightFunction::new_scaled(d * PSI, WeightFunctionShape::Theta),
             true,
         )

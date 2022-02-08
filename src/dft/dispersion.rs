@@ -2,6 +2,8 @@ use super::polar::calculate_helmholtz_energy_density_polar;
 use crate::eos::dispersion::{A0, A1, A2, B0, B1, B2};
 use crate::parameters::PcSaftParameters;
 use feos_core::EosError;
+use feos_dft::entropy_scaling::EntropyScalingFunctionalContribution;
+use feos_dft::fundamental_measure_theory::FMTProperties;
 use feos_dft::{
     FunctionalContributionDual, WeightFunction, WeightFunctionInfo, WeightFunctionShape,
 };
@@ -10,7 +12,6 @@ use num_dual::DualNum;
 use std::f64::consts::{FRAC_PI_3, PI};
 use std::fmt;
 use std::rc::Rc;
-use feos_dft::entropy_scaling::EntropyScalingFunctionalContribution;
 
 /// psi Parameter for DFT (Sauer2017)
 const PSI_DFT: f64 = 1.3862;
@@ -135,27 +136,26 @@ impl fmt::Display for AttractiveFunctional {
     }
 }
 
-
 impl EntropyScalingFunctionalContribution for AttractiveFunctional {
     fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
         let p = &self.parameters;
 
-        // set psi parameter
-        let mut psi = Array::zeros(p.n_segments.sum());
-        let mut j = 0;
-        for &s in p.n_segments.iter() {
-            for _ in 0..s {
-                psi[j] = if s == 1 {
-                    1.3862 // Homosegmented DFT (Sauer2017)
-                } else {
-                    1.5357 // Heterosegmented DFT (Mairhofer2018)
-                };
-                j += 1;
-            }
-        }
+        // // set psi parameter
+        // let mut psi = Array::zeros(p.component_index().len());
+        // let mut j = 0;
+        // for &s in p.component_index().iter() {
+        //     for _ in 0..s {
+        //         psi[j] = if s == 1 {
+        //             1.3862 // Homosegmented DFT (Sauer2017)
+        //         } else {
+        //             1.5357 // Heterosegmented DFT (Mairhofer2018)
+        //         };
+        //         j += 1;
+        //     }
+        // }
         let d = p.hs_diameter(temperature);
-        WeightFunctionInfo::new(p.component_index.clone(), false).add(
-            WeightFunction::new_scaled(d * psi, WeightFunctionShape::Theta),
+        WeightFunctionInfo::new(p.component_index().clone(), false).add(
+            WeightFunction::new_scaled(d * PSI_DFT, WeightFunctionShape::Theta),
             true,
         )
     }

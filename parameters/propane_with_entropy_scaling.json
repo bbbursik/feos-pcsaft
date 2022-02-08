@@ -1,0 +1,254 @@
+[
+    {
+        "identifier": {
+            "cas": "74-98-6",
+            "name": "propane",
+            "iupac_name": "propane",
+            "smiles": "CCC",
+            "inchi": "InChI=1/C3H8/c1-3-2/h3H2,1-2H3",
+            "formula": "C3H8"
+        },
+        "model_record": {
+            "m": 2.0018290000000003,
+            "sigma": 3.618353,
+            "epsilon_k": 208.1101,
+            "viscosity": [
+                -0.8013,
+                -1.9972,
+                -0.2907,
+                -0.0467
+            ],
+            "thermal_conductivity": [
+                -0.15348,
+                -0.6388,
+                1.21342,
+                -0.01664
+            ],
+            "diffusion": [
+                -0.675163251512047,
+                0.3212017677695878,
+                0.100175249144429,
+                0.0,
+                0.0
+            ]
+        },
+            "molarweight": 44.0962
+        
+    },
+    {
+        "identifier": {
+            "cas": "106-97-8",
+            "name": "butane",
+            "iupac_name": "butane",
+            "smiles": "CCCC",
+            "inchi": "InChI=1/C4H10/c1-3-4-2/h3-4H2,1-2H3",
+            "formula": "C4H10"
+        },
+        "model_record": {
+            "m": 2.331586,
+            "sigma": 3.7086010000000003,
+            "epsilon_k": 222.8774,
+            "viscosity": [
+                -0.8013,
+                -1.9972,
+                -0.2907,
+                -0.0467
+            ],
+            "thermal_conductivity": [
+                -0.15348,
+                -0.6388,
+                1.21342,
+                -0.01664
+            ],
+            "diffusion": [
+                -0.8985872992958458,
+                0.3428584416613513,
+                0.10236616087103916,
+                0.0,
+                0.0
+            ]
+        },
+        
+            "molarweight": 58.123
+        
+    },
+    {
+        "identifier": {
+            "cas": "630-08-0",
+            "name": "carbon-monoxide",
+            "iupac_name": "carbon monoxide",
+            "smiles": "[C-]#[O+]",
+            "inchi": "InChI=1/CO/c1-2",
+            "formula": "CO"
+        },
+        "model_record": {
+            "m": 1.4358090000000001,
+            "sigma": 3.135566,
+            "epsilon_k": 87.7191,
+            "mu": 0.1098
+        },
+        
+            "molarweight": 28.0104,
+            "h_bond_donor_count": 1,
+            "h_bond_acceptor_count": 1
+        
+    },
+    {
+        "identifier": {
+            "cas": "74-82-8",
+            "name": "methane",
+            "iupac_name": "methane",
+            "smiles": "C",
+            "inchi": "InChI=1/CH4/h1H4",
+            "formula": "CH4"
+        },
+        "model_record": {
+            "m": 1.0,
+            "sigma": 3.7038879999999996,
+            "epsilon_k": 150.034,
+            "viscosity": [
+                -0.0595340718,
+                -0.8908124709999999,
+                -0.0348297554,
+                -0.0176626686
+            ],
+            "diffusion": [
+                -5.236943954479592e-10,
+                0.04848299507381538,
+                0.08370440069243225,
+                0.0,
+                0.0
+            ]
+        },
+        
+            "molarweight": 16.0426
+        
+    },
+    {
+        "identifier": {
+            "cas": "142-82-5",
+            "name": "heptane",
+            "iupac_name": "heptane",
+            "smiles": "CCCCCCC",
+            "inchi": "InChI=1/C7H16/c1-3-5-7-6-4-2/h3-7H2,1-2H3",
+            "formula": "C7H16"
+        },
+        "model_record": {
+            "m": 3.4832949999999996,
+            "sigma": 3.8048699999999998,
+            "epsilon_k": 238.4009,
+            "viscosity": [
+                -1.2979,
+                -2.6936128,
+                -0.495069531,
+                -0.0988222588
+            ],
+            "diffusion": [
+                -1.2304148309355543,
+                0.4092939323317183,
+                0.1887921509038929,
+                0.0,
+                0.0
+            ]
+        },
+        
+            "molarweight": 100.2034
+        
+    },
+    {
+        "identifier": {
+            "cas": "124-18-5",
+            "name": "decane",
+            "iupac_name": "decane",
+            "smiles": "CCCCCCCCCC",
+            "inchi": "InChI=1/C10H22/c1-3-5-7-9-10-8-6-4-2/h3-10H2,1-2H3",
+            "formula": "C10H22"
+        },
+        "model_record": {
+            "m": 4.663209999999999,
+            "sigma": 3.83845,
+            "epsilon_k": 243.8661,
+            "viscosity": [
+                -1.5367,
+                -3.1489506,
+                -0.615410027,
+                -0.133372471
+            ],
+            "diffusion": [
+                -1.4881943462693787,
+                0.4305638762230554,
+                0.32222251340200747,
+                0.0,
+                0.0
+            ]
+        },
+        
+            "molarweight": 142.2838
+        
+    },
+    {
+        "identifier": {
+            "cas": "112-40-3",
+            "name": "dodecane",
+            "iupac_name": "dodecane",
+            "smiles": "CCCCCCCCCCCC",
+            "inchi": "InChI=1/C12H26/c1-3-5-7-9-11-12-10-8-6-4-2/h3-12H2,1-2H3",
+            "formula": "C12H26"
+        },
+        "model_record": {
+            "m": 5.305758999999999,
+            "sigma": 3.895892,
+            "epsilon_k": 249.2145,
+            "viscosity": [
+                -1.6719,
+                -3.39020393,
+                -0.6956429590000001,
+                -0.154563667
+            ],
+            "diffusion": [
+                -1.709976456320196,
+                0.4350370700652692,
+                0.3567181896779805,
+                0.0,
+                0.0
+            ]
+        },
+        
+            "molarweight": 170.3374
+        
+    },
+    {
+        "identifier": {
+            "cas": "7727-37-9",
+            "name": "nitrogen",
+            "iupac_name": "molecular nitrogen",
+            "smiles": "N#N",
+            "inchi": "InChI=1/N2/c1-2",
+            "formula": "N2"
+        },
+        "model_record": {
+            "m": 1.1504,
+            "sigma": 3.3848,
+            "epsilon_k": 91.4,
+            "q": 1.43,
+            "viscosity": [
+                -0.196376646,
+                -0.9460855,
+                -0.0309718769,
+                -0.0303367687
+            ],
+            "diffusion": [
+                -0.12855765455212295,
+                0.24885131958296933,
+                0.08052800000000002,
+                0.0,
+                0.0
+            ]
+        },
+        
+            "molarweight": 28.0134,
+            "h_bond_donor_count": 2,
+            "h_bond_acceptor_count": 2
+        
+    }
+]
