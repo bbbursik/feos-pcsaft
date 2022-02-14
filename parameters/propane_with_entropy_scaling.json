@@ -2,6 +2,42 @@
     {
         "identifier": {
             "cas": "74-98-6",
+            "name": "test",
+            "iupac_name": "test",
+            "smiles": "CCC",
+            "inchi": "InChI=1/C3H8/c1-3-2/h3H2,1-2H3",
+            "formula": "C3H8"
+        },
+        "model_record": {
+            "m": 1.0,
+            "sigma": 1.0,
+            "epsilon_k": 1,
+            "viscosity": [
+                -0.8013,
+                -1.9972,
+                -0.2907,
+                -0.0467
+            ],
+            "thermal_conductivity": [
+                -0.15348,
+                -0.6388,
+                1.21342,
+                -0.01664
+            ],
+            "diffusion": [
+                -0.675163251512047,
+                0.3212017677695878,
+                0.100175249144429,
+                0.0,
+                0.0
+            ]
+        },
+            "molarweight": 20.0
+        
+    },
+    {
+        "identifier": {
+            "cas": "74-98-6",
             "name": "propane",
             "iupac_name": "propane",
             "smiles": "CCC",
