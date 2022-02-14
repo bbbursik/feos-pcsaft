@@ -57,7 +57,6 @@ impl PcSaftFunctional {
         let mut entropy_scaling_contributions: Vec<Box<dyn EntropyScalingFunctionalContribution>> =
             Vec::with_capacity(4);
 
-        
         if matches!(
             fmt_version,
             FMTVersion::WhiteBear | FMTVersion::AntiSymWhiteBear
@@ -66,10 +65,14 @@ impl PcSaftFunctional {
             let fmt_assoc = PureFMTAssocFunctional::new(parameters.clone(), fmt_version);
             contributions.push(Box::new(fmt_assoc.clone()));
             entropy_scaling_contributions.push(Box::new(fmt_assoc.clone()));
-            
+
             //push second fmt functional, since need a wd for the entropy-sclaing of ideal chain contribution
-            entropy_scaling_contributions.push(Box::new(fmt_assoc.clone()));
-            
+            // entropy_scaling_contributions.push(Box::new(fmt_assoc.clone()));
+            entropy_scaling_contributions.insert(
+                0,
+                Box::new(PureChainFunctional::new(parameters.clone()).clone()),
+            );
+
             if parameters.m.iter().any(|&mi| mi > 1.0) {
                 let chain = PureChainFunctional::new(parameters.clone());
                 contributions.push(Box::new(chain.clone()));
@@ -85,7 +88,11 @@ impl PcSaftFunctional {
 
             //push second fmt functional, since need a wd for the entropy-sclaing of ideal chain contribution
             entropy_scaling_contributions.push(Box::new(hs.clone()));
-            entropy_scaling_contributions.push(Box::new(hs.clone()));
+            entropy_scaling_contributions.insert(
+                0,
+                Box::new(ChainFunctional::new(parameters.clone()).clone()),
+            );
+            // entropy_scaling_contributions.push(Box::new(hs.clone()));
 
             // Hard chains
             if parameters.m.iter().any(|&mi| !mi.is_one()) {
