@@ -94,6 +94,7 @@ pub fn dft(py: Python<'_>, m: &PyModule) -> PyResult<()> {
     m.add_class::<PyPore3D>()?;
     m.add_class::<PyPairCorrelation>()?;
     m.add_class::<PyExternalPotential>()?;
+    m.add_class::<PyDFTSpecification>()?;
     m.add_class::<PyAdsorption1D>()?;
     m.add_class::<PyAdsorption3D>()?;
     m.add_class::<PySurfaceTensionDiagram>()?;
