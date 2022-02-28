@@ -328,18 +328,222 @@ impl EntropyScalingFunctionalContribution for PureFMTAssocFunctional {
         let r = self.parameters.hs_diameter(temperature) * 0.5;
         WeightFunctionInfo::new(self.parameters.component_index().clone(), false)
             .add(
-                WeightFunction::new_scaled(r.clone(), WeightFunctionShape::Theta),
+                WeightFunction::new_scaled(r.clone()*0.5, WeightFunctionShape::Theta),
                 false,
             )
             .add(
-                WeightFunction::new_scaled(r.clone(), WeightFunctionShape::Delta),
+                WeightFunction::new_scaled(r.clone()*0.6, WeightFunctionShape::Theta),
                 false,
             )
+            .add(
+                WeightFunction::new_scaled(r.clone()*0.7, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*0.8, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*0.9, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.0, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.1, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.2, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.3, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.4, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.5, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.6, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.7, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.8, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.9, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*2.0, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*2.5, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*3.0, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*4.0, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*5.0, WeightFunctionShape::Theta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*0.5, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*0.6, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*0.7, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*0.8, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*0.9, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.0, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.1, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.2, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.3, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.4, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.5, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.6, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.7, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.8, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*1.9, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*2.0, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*2.5, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*3.0, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*4.0, WeightFunctionShape::Delta),
+                false,
+            )
+            .add(
+                WeightFunction::new_scaled(r.clone()*5.0, WeightFunctionShape::Delta),
+                false,
+            )
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // .add(
+            //     WeightFunction::new_scaled(r.clone(), WeightFunctionShape::Delta),
+            //     false,
+            // )
+            
         // .add(
         //     WeightFunction::new_scaled(r.clone(), WeightFunctionShape::DeltaVec),
         //     false,
         // )
     }
+
+    // fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
+    //     let r = self.parameters.hs_diameter(temperature) * 0.5;
+    //     let psis = Array::linspace(0.5, 2.5, 21);
+    //     let mut wf_info = WeightFunctionInfo::new(self.parameters.component_index(), false);
+    //     // for psi in psis{
+    //     //     let wf_info = wf_info.add(
+    //     //         WeightFunction::new_scaled(&r*psi, WeightFunctionShape::Theta),
+    //     //         true,
+    //     //     );
+    //     psis.iter().for_each(|&psi| {
+    //         wf_info.add(
+    //                 WeightFunction::new_scaled(r.clone()* psi, WeightFunctionShape::Theta),
+    //                 true,
+    //             );
+    //         }
+    //     );
+
+    
+        
+    //     println!("psis are used");
+    
+    //     // for psi in psis{
+    //     //     let wf_info = wf_info.add(
+    //     //         WeightFunction::new_scaled(&r*psi, WeightFunctionShape::Delta),
+    //     //         true,
+    //     //     );
+    //     // }
+        
+    //     wf_info
+        
+    // }
+
 }
 
 impl EntropyScalingFunctionalContribution for PureChainFunctional {
