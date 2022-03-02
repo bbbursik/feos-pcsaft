@@ -327,6 +327,10 @@ impl EntropyScalingFunctionalContribution for PureFMTAssocFunctional {
     fn weight_functions_entropy(&self, temperature: f64) -> WeightFunctionInfo<f64> {
         let r = self.parameters.hs_diameter(temperature) * 0.5;
         WeightFunctionInfo::new(self.parameters.component_index().clone(), false)
+        .add(
+            WeightFunction::new_scaled(r.clone(), WeightFunctionShape::Theta),
+            false,
+        )
             .add(
                 WeightFunction::new_scaled(r.clone()*0.5, WeightFunctionShape::Theta),
                 false,
