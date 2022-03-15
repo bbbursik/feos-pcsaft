@@ -1,4 +1,28 @@
 [
+   
+    
+    {
+        "identifier": {
+            "cas": "7440-37-1",
+            "name": "test_argon",
+            "iupac_name": "test_argon",
+            "smiles": "[Ar]",
+            "inchi": "InChI=1/Ar",
+            "formula": "Ar"
+        },
+        "model_record": {
+            "m": 1.0,
+            "sigma": 3.5,
+            "epsilon_k": 120.0,
+            "viscosity": [
+                -0.8013,
+                -1.9972,
+                -0.2907,
+                -0.0467
+            ]
+        },
+        "molarweight": 39.948
+    },
     {
         "identifier": {
             "cas": "74-98-6",
