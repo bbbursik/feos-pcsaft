@@ -38,5 +38,27 @@
             "Lz": 47.67600
         },
         "Forcefield": "PASCUAL"
+    },
+        {
+        "Name": "FAU_SI_1_1_1",
+        "N_atom": 576,
+        "Dimensions": {
+            "Lx": 24.25800,
+            "Ly": 24.25800,
+            "Lz": 24.25800   
+        },
+        "Forcefield": "PASCUAL"
+    },
+        {
+        "Name": "FAU_SI_2_2_2",
+        "N_atom": 4608,
+        "Dimensions": {
+            "Lx": 48.515,
+            "Ly": 48.515,
+            "Lz": 48.515
+        },
+        "Forcefield": "PASCUAL"
     }
+
+
 ]
