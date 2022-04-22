@@ -15,7 +15,7 @@ exclude = ["/.github/*", "*.ipynb", "/examples/*", "/parameters/*"]
 [dependencies]
 quantity = "0.5"
 feos-core = "0.2"
-feos-dft = "0.2"
+feos-dft = "0.2"#{ path = "../feos-dft" }
 num-dual = "0.5"
 num-traits = "0.2"
 ndarray = { version = "0.15", features=["approx"] }
