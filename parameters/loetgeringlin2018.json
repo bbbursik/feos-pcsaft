@@ -1,6 +1,32 @@
 [
     {
         "identifier": {
+            "cas": "",
+            "name": "test_LJ",
+            "iupac_name": "",
+            "smiles": "",
+            "inchi": "",
+            "formula": ""
+        },
+        "molarweight": 1,
+        "model_record": {
+            "m": 1.0,
+            "sigma": 3.5,
+            "epsilon_k": 120.0,
+            "mu": 0.0,
+            "q": 0.0,
+            "kappa_ab": 0.0,
+            "epsilon_k_ab": 0.0,
+            "viscosity": [
+                -0.8013,
+                -1.9972,
+                -0.2907,
+                -0.0467
+            ]
+        }
+    },
+    {
+        "identifier": {
             "cas": "354-33-6",
             "name": "pentafluoroethane [r125]",
             "iupac_name": "1,1,1,2,2-pentafluoroethane",

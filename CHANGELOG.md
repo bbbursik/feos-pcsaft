@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Changes in Entropy Scaling Branch
+### Adsorption
+- add l_grid as optional parameter to Pore3D.new() and use l_grid (if given) instead of systems size to set the length of the DFT-grid --> allows for small DFT domain with larger wall system --> helpful if only a small part of a system is of interest, but all interactions should be included  
+
+
 ## [Unreleased]
 
 ## [0.2.0] - 2022-04-25
